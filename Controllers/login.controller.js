@@ -6,12 +6,12 @@ export const loginUser = async (req, res) => {
  
    // Function to generate accesstoken and refresh token
     const generateAccessandRefreshToken = async(userId) => {
-      const user = User.findById(userId)
+      const user = await User.findById(userId)
       const accessToken = user.generateAccessToken()
       const refreshToken = user.generateRefreshTokens()
  
       user.refreshToken = refreshToken
-      await user.save({ validavalidateBeforeSave: false })
+      await user.save({ validateBeforeSave: false })
  
       return {accessToken , refreshToken}
    }
@@ -22,7 +22,7 @@ export const loginUser = async (req, res) => {
    }
  
    //Check user details in database
-   const user = User.findOne({ email })
+   const user = await User.findOne({ email })
    
    if (!user) {
      console.log(`User not found for email : ${email}`)
@@ -30,18 +30,18 @@ export const loginUser = async (req, res) => {
    }
  
    // check password entered by the user
-   const isPasswordValid = user.isPasswordCorrect(password)
+   const isPasswordValid =  user.isPasswordCorrect(password)
    if (!isPasswordValid) {
      return res.status(401).json({error : "Wrong password. Please enter correct passowrd"})
    }
  
    // Generate token via usermodel methods
-   const { accessToken, refreshToken } = generateAccessandRefreshToken(user._Id)
+   const { accessToken, refreshToken } = await generateAccessandRefreshToken(user._id)
    
    // create options for sending Tokens in cookie
    const options = {
      httpOnly: true,
-     secure : true,
+     secure : true, 
    }
  
    return res.status(200)

@@ -1,7 +1,5 @@
 import dotenv from "dotenv"
-dotenv.config({
-  path : './env'
-});
+dotenv.config();
 import express from "express";
 import connectdb from "./DB/database.js";
 import cookieParser from "cookie-parser";
