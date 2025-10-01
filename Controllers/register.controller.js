@@ -1,5 +1,8 @@
 import { User } from "../Models/User.model.js"
 
+export const helloWorld = async (req, res) => {
+  res.send("Hello World !!")
+}
 export const registerUser = async (req, res) => {
  try {
    const { username, email, number, password } = req.body
