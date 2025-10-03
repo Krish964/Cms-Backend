@@ -9,7 +9,7 @@ router.route("/").get(helloWorld)
 
 router.route("/register").post(registerUser)
 router.route("/login").post(loginUser)
-router.route("logout").post(logoutUser)
+router.route("/logout").post(logoutUser)
 router.route("/createArticle").post(createArticle)
 router.route("/getArticles").get(authenticateUser , getArticles)
 router.route("/getArticlesbyId/:id").get(authenticateUser , getArticlesbyId)
