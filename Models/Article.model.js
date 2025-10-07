@@ -6,6 +6,7 @@ const articleSchema = new mongoose.Schema({
     required: true,
     lowercase: true
   },
+
   subtitle: {
     type: String,
     required: true,
@@ -25,6 +26,10 @@ const articleSchema = new mongoose.Schema({
     type: String,
     required: true,
     lowercase: true
+ },
+  image : {
+    type: String,
+    required: true,
  }
 }, { timestamps: true })
 

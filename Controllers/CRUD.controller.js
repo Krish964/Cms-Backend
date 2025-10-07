@@ -1,5 +1,5 @@
 import { Article } from "../Models/Article.model.js";
-
+import { uploadFileOnCloudinary } from "../Utils/cloudinary.js";
 // Create operation
 export const createArticle = async (req, res) => {
   try {
@@ -8,13 +8,21 @@ export const createArticle = async (req, res) => {
     if (!title || !subtitle || !author || !description) {
       return res.status(400).json({ error: "Title, Description, and Author are required fields." });
     }
+ 
+    const imageLocalPath = req.file?.path;
+    if (!imageLocalPath) {
+      return res.status(400).json({ error: "Resume file is required" });
+    }
 
+    const image = await uploadFileOnCloudinary(imageLocalPath);
+    
     const newArticle = new Article({
       title,
       subtitle,
       description,
       author,
-      location
+      location,
+      image
     })
 
     await newArticle.save()
