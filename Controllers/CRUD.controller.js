@@ -15,7 +15,7 @@ export const createArticle = async (req, res) => {
     }
 
     const image = await uploadFileOnCloudinary(imageLocalPath);
-    
+
     const newArticle = new Article({
       title,
       subtitle,
@@ -34,7 +34,8 @@ export const createArticle = async (req, res) => {
       subtitle,
       description,
       author,
-      location
+      location,
+      image
     })
   } catch (error) {
     res.status(500).json({ "Error in creating article": error.message });

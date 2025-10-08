@@ -3,6 +3,7 @@ import { helloWorld, registerUser } from "../Controllers/register.controller.js"
 import { loginUser, logoutUser } from "../Controllers/login.controller.js";
 import { createArticle, deleteArticles, getArticles, getArticlesbyId, updateArticles } from "../Controllers/CRUD.controller.js";
 import { authenticateUser } from "../Middlewares/Auth.middlewares.js";
+import {upload} from "../Middlewares/multer.middleware.js"
 const router = Router();
 
 router.route("/").get(helloWorld)
